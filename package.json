@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "test": "mocha --exit --require ts-node/register test/*.ts",
-    "sandbox": "nodemon -e ts --exec 'ts-node' src/sandbox.ts"
+    "sandbox": "nodemon -e ts --exec 'ts-node' sandbox/sandbox.ts"
   },
   "keywords": [],
   "author": "Ivan Pusic",

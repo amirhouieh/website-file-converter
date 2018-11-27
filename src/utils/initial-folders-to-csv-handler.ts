@@ -1,7 +1,7 @@
-import {convertDir} from './convertor';
+import {convertDir} from '../convertor';
 import {readdirSync, readFileSync, writeFileSync, writeSync} from 'fs';
 import slugify from 'slugify';
-import {BasicData} from './types/basic-data';
+import {BasicData} from '../types/basic-data';
 import * as path from 'path';
 const sequential = require('promise-sequential');
 import * as _ from "lodash";
@@ -14,10 +14,6 @@ export const saveJson = <T>(filepath: string, data: T): void => {
     writeFileSync(filepath, JSON.stringify(data, null, 2));
     writeFileSync(filepath.replace(".json", ".min.json"), JSON.stringify(data));
 };
-
-const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
 
 (async () => {
     const root = process.argv[2];

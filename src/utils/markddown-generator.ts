@@ -1,11 +1,6 @@
-import {convertDir} from './convertor';
 import {readdirSync, readFileSync, writeFileSync, writeSync} from 'fs';
-import slugify from 'slugify';
-import {BasicData} from './types/basic-data';
 import * as path from 'path';
-const sequential = require('promise-sequential');
 import * as _ from "lodash";
-const { transformAndWriteToFile } = require("json-to-frontmatter-markdown");
 
 (async () => {
     const root = process.argv[2];
@@ -19,14 +14,14 @@ const { transformAndWriteToFile } = require("json-to-frontmatter-markdown");
     const csv = readFileSync(dataPath).toString('utf8');
 
     const lineToData = (line: string[]) => {
-      return {
-          index: line.shift().toLowerCase(),
-          slug: line.shift().toLowerCase(),
-          title: line.shift().toLowerCase(),
-          text: line.shift().toLowerCase(),
-          year: line.shift().toLowerCase(),
-          tags: line.filter(t => t.trim().length > 0).map(t=>t.toLowerCase()),
-      }
+        return {
+            index: line.shift().toLowerCase(),
+            slug: line.shift().toLowerCase(),
+            title: line.shift().toLowerCase(),
+            text: line.shift().toLowerCase(),
+            year: line.shift().toLowerCase(),
+            tags: line.filter(t => t.trim().length > 0).map(t=>t.toLowerCase()),
+        }
     };
     const data = csv
         .split("\n")
@@ -52,6 +47,7 @@ const { transformAndWriteToFile } = require("json-to-frontmatter-markdown");
                     return `${key}: [${value.map(v=>`"${v}"`).join(", ")}]`
                 }
             }).join("\n");
+
         md += `\n---\n`;
 
         console.log(`${fileData.slug} -> ${dir}`);
